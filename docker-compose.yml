@@ -3,13 +3,15 @@ version: "3"
 services:
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: ./bin/rails server -e development -b 0.0.0.0 -p 80
     volumes:
       - .:/app
     ports:
-      - "3000:8000"
+      - "8000:80"
     depends_on:
       - db
+    environment:
+      SECRET_KEY_BASE: secret
 
   db:
     image: postgres
