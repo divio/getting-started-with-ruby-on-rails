@@ -26,6 +26,11 @@ RUN bundle install && \
 # Copy application code
 COPY . /rails
 
+# Entrypoint prepares the database.
+RUN chmod +x ./bin/docker-entrypoint
+RUN chmod +x ./bin/rails
+ENTRYPOINT ["./bin/docker-entrypoint"]
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
@@ -38,11 +43,6 @@ RUN apt-get update -qq && \
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
-
-# Entrypoint prepares the database.
-RUN chmod +x ./bin/docker-entrypoint
-RUN chmod +x ./bin/rails
-ENTRYPOINT ["./bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 80

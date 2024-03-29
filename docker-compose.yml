@@ -5,7 +5,7 @@ services:
     build: .
     command: ./bin/rails server -e development -b 0.0.0.0 -p 80
     volumes:
-      - .:/app
+      - .:/rails
     ports:
       - "8000:80"
     depends_on:
