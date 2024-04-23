@@ -39,11 +39,6 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
-
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 80
 CMD ["./bin/rails", "server", "-p", "80", "-b", "0.0.0.0"]
