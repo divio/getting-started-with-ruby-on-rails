@@ -76,6 +76,7 @@ Rails.application.configure do
 
   # Divio Cloud config
   config.hosts = [
-    /.*\.aldryn\.io/
+    /.*\.aldryn\.io/,
+    "localhost:8000"
   ]
 end
