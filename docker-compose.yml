@@ -15,7 +15,7 @@ services:
       SECRET_KEY_BASE: secret
 
   db:
-    image: postgres
+    image: postgres:15.7-alpine
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
